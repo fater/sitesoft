@@ -32,4 +32,16 @@ class Message extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
+    /**
+     * Выборка всех сообщений пользователей по убыванию даты
+     *
+     * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Support\Collection|static[]
+     */
+    public static function getAllMessages()
+    {
+        return (new self())
+            ->orderBy('created_at', 'DESC')
+            ->get();
+    }
 }
