@@ -1,23 +1,34 @@
-@extends('layouts.app')
+@extends('layouts.sitesoft')
 
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Dashboard</div>
+    <div class="row-fluid">
+        <div class="span2"></div>
+        <div class="span8">
 
-                <div class="panel-body">
-                    @if (session('status'))
-                        <div class="alert alert-success">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    You are logged in!
+            @if(Auth::check())
+            {{-- ФОРМА ДОБАВЛЕНИЯ СООБЩЕНИЯ ДЛЯ АВТОРИЗОВАННЫХ ПОЛЬЗОВАТЕЛЕЙ --}}
+            <form action="" method="post" class="form-horizontal" style="margin-bottom: 50px;">
+                <div class="alert alert-error">
+                    Сообщение не может быть пустым
                 </div>
-            </div>
+
+                <div class="control-group">
+                <textarea style="width: 100%; height: 50px;" type="password" id="inputText" placeholder="Ваше сообщение..."
+                        data-cip-id="inputText" required></textarea>
+                </div>
+                <div class="control-group">
+                    <button type="submit" class="btn btn-primary">Отправить сообщение</button>
+                </div>
+            </form>
+            @endif
+
+            {{-- БЛОК СПИСКА СООБЩЕНИЙ --}}
+            @foreach(\App\Message::getAllMessages() as $message)
+                <div class="well">
+                    <h5>{{ $message->getUser->name }}</h5>
+                    {{ $message->message }}
+                </div>
+            @endforeach
         </div>
     </div>
-</div>
 @endsection
