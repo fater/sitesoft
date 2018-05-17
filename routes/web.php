@@ -11,7 +11,14 @@
 |
 */
 
+// Home page
 Route::get('', 'HomeController@index')->name('home');
 
+// Роуты авторизации и регистрации
 Auth::routes();
+
+// Страница об успешном окончании регистрации
 Route::get('success', 'HomeController@success')->name('success');
+
+// Добавление сообщения
+Route::post('', 'HomeController@postAddMessage')->name('add_message');
