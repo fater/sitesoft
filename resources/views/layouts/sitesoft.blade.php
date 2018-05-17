@@ -20,12 +20,12 @@
     <div class="navbar-inner">
         <a class="brand" href="{{ route('home') }}">Сайтсофт</a>
         <ul class="nav">
-            <li @if(Route::current()->getName() == 'home')class="active"@endif><a href="{{ route('home') }}">Главная</a>
+            <li @if(Route::is('home'))class="active"@endif><a href="{{ route('home') }}">Главная</a>
             </li>
             @if(Auth::guest())
-                <li @if(Route::current()->getName() == 'login')class="active"@endif>
+                <li @if(Route::is('login'))class="active"@endif>
                     <a href="{{ route('login') }}">Авторизация</a></li>
-                <li @if(Route::current()->getName() == 'register')class="active"@endif>
+                <li @if(Route::is('register'))class="active"@endif>
                     <a href="{{ route('register') }}">Регистрация</a></li>
             @endif
         </ul>
