@@ -14,3 +14,4 @@
 Route::get('', 'HomeController@index')->name('home');
 
 Auth::routes();
+Route::get('success', 'HomeController@success')->name('success');
