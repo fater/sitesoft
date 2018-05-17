@@ -15,7 +15,9 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name',
+        'email',
+        'password',
     ];
 
     /**
@@ -24,6 +26,17 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password',
+        'remember_token',
     ];
+
+    /**
+     * Список сообщений пользователя
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany|Message
+     */
+    public function getMessages()
+    {
+        return $this->hasMany(Message::class, 'user_id');
+    }
 }
