@@ -20,15 +20,27 @@
     <div class="navbar-inner">
         <a class="brand" href="{{ route('home') }}">Сайтсофт</a>
         <ul class="nav">
-            <li class="active"><a href="{{ route('home') }}">Главная</a></li>
-            <li><a href="#">Авторизация</a></li>
-            <li><a href="#">Регистрация</a></li>
+            <li @if(Route::current()->getName() == 'home')class="active"@endif><a href="{{ route('home') }}">Главная</a></li>
+            @if(Auth::guest())
+                <li @if(Route::current()->getName() == 'login')class="active"@endif><a href="{{ route('login') }}">Авторизация</a></li>
+                <li @if(Route::current()->getName() == 'register')class="active"@endif><a href="{{ route('register') }}">Регистрация</a></li>
+            @endif
         </ul>
 
-        <ul class="nav pull-right">
-            <li><a>Username</a></li>
-            <li><a href="#">Выход</a></li>
-        </ul>
+        @guest
+        @else
+            <ul class="nav pull-right">
+                <li><a>{{ Auth::user()->name }}</a></li>
+                <li>
+                    <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"> Выход </a>
+
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        {{ csrf_field() }}
+                    </form>
+                </li>
+            </ul>
+        @endguest
+
     </div>
 </div>
 
