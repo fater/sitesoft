@@ -23,6 +23,8 @@ class Message extends Model
 {
     protected $table = 'messages';
 
+    protected $fillable = ['message', 'user_id'];
+
     /**
      * Информация о пользователе
      *

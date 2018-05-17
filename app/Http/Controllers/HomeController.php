@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AddMessage;
 use App\Message;
 use Illuminate\Http\Request;
 
@@ -40,26 +41,19 @@ class HomeController extends Controller
     /**
      * Обработка данных формы и добавление сообщений
      *
-     * @param Request $request
+     * @param AddMessage $request
      *
      * @return $this
      */
-    public function postAddMessage(Request $request)
+    public function postAddMessage(AddMessage $request)
     {
-        $validate = \Validator::make($request->all(), [
-            'message' => [
-                'required',
-                'regex:/^.*\S.*$/u',
-            ]
+        $validate = $request->validated();
+
+        Message::create([
+            'message' => $validate['message'],
+            'user_id' => \Auth::user()->id
         ]);
 
-        if (\Auth::check() && $validate->passes()) {
-            $newMessage = new Message();
-            $newMessage->message = $request->input('message');
-            $newMessage->user_id = \Auth::user()->id;
-            $newMessage->save();
-        }
-
-        return view('home')->withErrors($validate->errors());
+        return view('home');
     }
 }
