@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'failed' => 'Пользователь с таким E-Mail адресом не найден.',
+    'failed' => 'Вход в систему с указанными данными невозможен.',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
 
 ];
