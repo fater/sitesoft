@@ -50,7 +50,7 @@ class ModelUserTest extends TestCase
      */
     public function testCreateUser()
     {
-        $this->userObject::create([
+        \factory(User::class)->create([
             'name' => $this->name,
             'email' => $this->email,
             'password' => bcrypt($this->password),
